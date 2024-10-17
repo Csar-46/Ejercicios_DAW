@@ -287,7 +287,8 @@ public class Excepciones {
 
         System.out.println("¡Hola, bienbenido a la CALCULADORA DE CESAR!");
 
-        while (error == true){
+        //Controlamos que el valor de entrada sea numerico
+        while (error){
 
             try {
 
@@ -297,20 +298,23 @@ public class Excepciones {
 
             } catch (InputMismatchException e1){
 
-                System.out.println("ERROR. El operador debe ser numérico." + e1);
+                System.out.println("ERROR. El operador debe ser numérico.(" + e1 + ")");
                 entrada.nextLine();
 
             }
 
         }
 
+        //Pedimos el operador que queremos y lo guardamos en un String.
         System.out.println("A continuación introduce la operación que quieres realizar ( + , - , / , x , R (raíz cuadrada)):");
         operacion= entrada.next();
         String operacionM = operacion.toUpperCase();
 
-        while (error2 == true){
+        //Comprobamos que el valor introducido de la siguiente variable sea numérico.
+        while (error2){
             try {
 
+            //Con este if nos aseguramos que de el numero que introducimos en la raiz no es engativo y de que no pedimos el segundo numero.
             if (operacionM.equals("R")){
                 while (operando1 < 0){
                     System.out.println("ERROR. El valor de la raíz cuadrada no puede ser negativo.");
@@ -322,6 +326,7 @@ public class Excepciones {
                 System.out.println("El resultado de la raíz cuadrada del número es: " + resultado);
                 error2 = false;
 
+                //En caso de no haber seleccionado R, pedimos el segundo número y entramos al switch.
                 }else{
 
                     System.out.println("Por favor, introduce el segundo operador con el que quieres calcular.");
@@ -340,12 +345,13 @@ public class Excepciones {
                             error2 = false;
                             break;
                         case "/":
+                            //Comprobamos que el segundo valor no sea 0 cuando hagamos la operación de dividir.
                             while (operando2 == 0){
                                 System.out.println("ERROR. No se puede dividir entre 0 .");
                                 System.out.println("Introduce un número mayor o menor que 0:");
                                 operando2 = entrada.nextInt();
                             }
-                            resultado = operando1 / operando2;
+                            resultado = operando1 / (double)(operando2);
                             System.out.println("El resultado de la división de los dos numeros es: " + resultado);
                             error2 = false;
                             break;
@@ -354,12 +360,13 @@ public class Excepciones {
                             System.out.println("El resultado de la multiplicación de los dos numeros es: " + resultado);
                             error2 = false;
                             break;
+                        //El default salta cuando el operador introducido no es nunguno de los que se ha indicado.
                         default:
                             System.out.println("ERROR. El operador no se reconoce.");
                             error2 = false;
                     }
                 }
-
+            //En caso de que en algun momento se introduzca un valor que no sea un numero saltará el catch.
             }catch (InputMismatchException e2){
 
                 System.out.println("ERROR. El segundo valor debe ser numérico. (" + e2 + ")");
