@@ -10,6 +10,5 @@ public class Main {
         Excepciones ejercicios = new Excepciones();
         ejercicios.practica2();
 
-
     }
 }

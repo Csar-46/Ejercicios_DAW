@@ -1,6 +1,7 @@
 package org.example;
 
 import java.time.LocalDateTime;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Excepciones {
@@ -279,50 +280,95 @@ public class Excepciones {
         int operando2 = 0;
         double resultado = 0;
         String operacion;
+        boolean error = true;
+        boolean error2 = true;
 
         Scanner entrada = new Scanner (System.in);
 
         System.out.println("¡Hola, bienbenido a la CALCULADORA DE CESAR!");
-        System.out.println("Por favor, introduce el primer operando con el que quieres calcular.");
-        operando1= entrada.nextInt();
 
-        System.out.println("A continuación introduce la operación que quieres realizar ( + , - , / , x , R (raíz cuadrada))");
-        operacion = entrada.next();
+        while (error == true){
 
-        if (operacion == "R"){
+            try {
 
-            resultado = Math.sqrt(operando1);
-            System.out.println("El resultado de la raíz cuadrada del número es: " + resultado);
+                System.out.println("Por favor, introduce el primer operador con el que quieres calcular:");
+                operando1= entrada.nextInt();
+                error = false;
 
-        }else{
+            } catch (InputMismatchException e1){
 
-            System.out.println("Por favor, introduce el primer operando con el que quieres calcular.");
-            operando2=entrada.nextInt();
+                System.out.println("ERROR. El operador debe ser numérico." + e1);
+                entrada.nextLine();
 
-            switch (operacion.toUpperCase()){
+            }
 
-                case "+":
-                    resultado = operando1 + operando2;
-                    System.out.println("El resultado de la suma de los dos numeros es: " + resultado);
-                    break;
-                case "-":
-                    resultado = operando1 - operando2;
-                    System.out.println("El resultado de la resta de los dos numeros es: " + resultado);
-                    break;
-                case "/":
-                    resultado = operando1 / operando2;
-                    System.out.println("El resultado de la división de los dos numeros es: " + resultado);
-                    break;
-                case "X":
-                    resultado = operando1 * operando2;
-                    System.out.println("El resultado de la multiplicación de los dos numeros es: " + resultado);
-                    break;
-                default:
-                    System.out.println("ERROR. El operador no se reconoce.");
+        }
+
+        System.out.println("A continuación introduce la operación que quieres realizar ( + , - , / , x , R (raíz cuadrada)):");
+        operacion= entrada.next();
+        String operacionM = operacion.toUpperCase();
+
+        while (error2 == true){
+            try {
+
+            if (operacionM.equals("R")){
+                while (operando1 < 0){
+                    System.out.println("ERROR. El valor de la raíz cuadrada no puede ser negativo.");
+                    System.out.println("Introduce un número positivo:");
+                    operando1 = entrada.nextInt();
+                }
+
+                resultado = Math.sqrt(operando1);
+                System.out.println("El resultado de la raíz cuadrada del número es: " + resultado);
+                error2 = false;
+
+                }else{
+
+                    System.out.println("Por favor, introduce el segundo operador con el que quieres calcular.");
+                    operando2=entrada.nextInt();
+
+                    switch (operacionM){
+
+                        case "+":
+                            resultado = operando1 + operando2;
+                            System.out.println("El resultado de la suma de los dos numeros es: " + resultado);
+                            error2 = false;
+                            break;
+                        case "-":
+                            resultado = operando1 - operando2;
+                            System.out.println("El resultado de la resta de los dos numeros es: " + resultado);
+                            error2 = false;
+                            break;
+                        case "/":
+                            while (operando2 == 0){
+                                System.out.println("ERROR. No se puede dividir entre 0 .");
+                                System.out.println("Introduce un número mayor o menor que 0:");
+                                operando2 = entrada.nextInt();
+                            }
+                            resultado = operando1 / operando2;
+                            System.out.println("El resultado de la división de los dos numeros es: " + resultado);
+                            error2 = false;
+                            break;
+                        case "X":
+                            resultado = operando1 * operando2;
+                            System.out.println("El resultado de la multiplicación de los dos numeros es: " + resultado);
+                            error2 = false;
+                            break;
+                        default:
+                            System.out.println("ERROR. El operador no se reconoce.");
+                            error2 = false;
+                    }
+                }
+
+            }catch (InputMismatchException e2){
+
+                System.out.println("ERROR. El segundo valor debe ser numérico. (" + e2 + ")");
+                entrada.nextLine();
             }
         }
     }
 }
+
 
 
 
