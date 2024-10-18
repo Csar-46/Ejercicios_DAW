@@ -7,8 +7,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Excepciones ejercicios = new Excepciones();
-        ejercicios.practica2();
+        Bucles ejercicios = new Bucles();
+        ejercicios.ejercicio4();
 
     }
 }
