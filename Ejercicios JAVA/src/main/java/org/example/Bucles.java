@@ -70,7 +70,7 @@ public class Bucles {
 
             letra = palabra.charAt(inicio);
 
-            inicio ++;
+            inicio ++; //¡¡¡¡CORREGIR ESTO!!!!
 
             System.out.println(letra);
 
