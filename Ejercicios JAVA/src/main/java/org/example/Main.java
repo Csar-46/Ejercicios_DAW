@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         Bucles ejercicios = new Bucles();
-        ejercicios.ejercicio4();
+        ejercicios.practica2();
 
     }
 }

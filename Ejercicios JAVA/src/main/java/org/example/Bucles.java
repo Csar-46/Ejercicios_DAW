@@ -63,17 +63,49 @@ public class Bucles {
         Scanner entrada = new Scanner(System.in);
         System.out.println("Introduce una palabra: ");
         palabra = entrada.next();
+        int inicio = 0;
 
-        for (int i = palabra.length() ; i <= palabra.length() ; i++){
-
-            int inicio = 0;
+        for (int i = palabra.length() ; i > 0 ; i--){
 
             letra = palabra.charAt(inicio);
-
-            inicio ++; //¡¡¡¡CORREGIR ESTO!!!!
+            inicio ++;
 
             System.out.println(letra);
 
         }
+    }
+
+    public void practica2 () {
+
+        Scanner entrada = new Scanner(System.in);
+
+        System.out.println("Introduzca un ISBN: ");
+        String ISBN = entrada.next();
+        int inicio = 0;
+        char digito;
+        int suma = 0;
+        int resultado;
+        int num;
+
+        for (int i = 10; i > 0; i--){
+
+            digito = ISBN.charAt(inicio);
+            num = Integer.parseInt(String.valueOf(digito));
+            inicio++;
+
+           // if (digito == "?"){
+
+           //     continue;
+           // }
+
+            resultado = num*i;
+            suma = resultado + suma;
+
+        }
+
+        if (suma % 11 == 0){
+            System.out.println("El ISBN es válido.");
+        } else
+            System.out.println("El ISBN no es válido.");
     }
 }
