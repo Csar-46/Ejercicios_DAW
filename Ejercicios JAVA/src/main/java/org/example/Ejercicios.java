@@ -264,4 +264,63 @@ public class Ejercicios {
 
     }
 
+    public void preexamen1 () {
+
+        Scanner entrada = new Scanner(System.in);
+
+        System.out.println("¿Cuántos números quieres introducir?");
+        int cantidad = entrada.nextInt();
+
+        int num;
+        int mayor = 0;
+        int menor = 0;
+        int igual = 0;
+
+        for (int i = 0 ; i < cantidad ; i++){
+
+            System.out.println("Introduce un número: ");
+            num = entrada.nextInt();
+
+            if (num > 0){
+                mayor++;
+            }else if (num < 0){
+                menor++;
+            }else
+                igual++;
+        }
+        System.out.println("Hay " + mayor + " numeros mayores que cero, " + menor + " numeros menores que cero y " + igual + " numeros iguales que cero.");
+    }
+
+    public void preexamen2 () {
+
+        Scanner entrada = new Scanner(System.in);
+
+        System.out.println("Introduce la base.");
+        int base = entrada.nextInt();
+        int resultado = 0;
+
+        System.out.println("Introduce el exponente.");
+        int exponente = entrada.nextInt();
+
+        while (exponente < 0){
+            System.out.println("ERROR. introduce un exponente positivo.");
+            exponente = entrada.nextInt();
+        }
+
+        for (int i = 0 ; i < exponente ; i++){
+
+            resultado += base*base;
+
+        }
+        if (exponente == 0){
+            System.out.println("El resultado de la potencia es: 1");
+
+        }else if (base < 0){
+
+            System.out.println("El resultado de la potencia es: " + (resultado*-1));
+
+        }else if (base > 0)
+            System.out.println("El resultado de la potencia es: " + resultado);
+
+    }
 }

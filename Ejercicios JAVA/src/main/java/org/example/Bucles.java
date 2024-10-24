@@ -78,6 +78,7 @@ public class Bucles {
     public void practica2 () {
 
         Scanner entrada = new Scanner(System.in); //Declaración de variables.
+
         System.out.println("Introduzca un ISBN: ");
         String ISBN = entrada.next();
         int inicio = 0;
