@@ -37,7 +37,7 @@ public class Ejercicios {
         System.out.println("El resultado es: " + resultado);
     }
 
-    public void ejercicio1 (){
+    public void ejercicio1 () {
         System.out.println("Bienvenido! Introduzca un número porfavor: ");
 
         Scanner entrada = new Scanner(System.in);
@@ -52,7 +52,7 @@ public class Ejercicios {
 
     }
 
-    public void ejercicio2 (){
+    public void ejercicio2 () {
         Scanner entrada = new Scanner(System.in);
 
         System.out.println("Introduce un número:");
@@ -70,7 +70,7 @@ public class Ejercicios {
             System.out.println( num1 + " es mayor que " + num2);
     }
 
-    public void ejercicio3 (){
+    public void ejercicio3 () {
         int resultado;
         Scanner entrada = new Scanner(System.in);
 
@@ -90,7 +90,7 @@ public class Ejercicios {
         }
     }
 
-    public void ejercicio4 (){
+    public void ejercicio4 () {
 
         Scanner entrada = new Scanner(System.in);
         int b = 0;
@@ -478,7 +478,31 @@ public class Ejercicios {
 
     public void preexamen7 () {
 
-        
+        Scanner entrada = new Scanner(System.in);
 
+        System.out.println("¿Cuántos números quieres imprimir?");
+
+        int num = entrada.nextInt();
+        int resultado = 0;
+        int num1 = 0;
+        int num2 = 1;
+
+        while (num <= 0){
+
+            System.out.println("ERROR. introcude un número entero positivo.");
+            num = entrada.nextInt();
+
+        }
+
+        System.out.print("Secuencia de Números:");
+
+        for (int i = 0; i < num; i++) {
+
+            System.out.print(" " + resultado);
+            resultado = num1 + num2;
+            num1 = num2;
+            num2 = resultado;
+
+        }
     }
 }
