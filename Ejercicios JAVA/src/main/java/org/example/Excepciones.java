@@ -53,7 +53,7 @@ public class Excepciones {
 
     }
 
-    public void ejercicio0() { //Ejercicio con switch-case.
+    public void ejercicio0() { //Ejercicio con switch-case y comando fecha actual.
 
         System.out.println("BIENVENIDO A LA CLASIFICACIÓN DE GENERACIONES");
         System.out.println("Elige un modo: ");
