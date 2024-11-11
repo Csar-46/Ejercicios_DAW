@@ -255,8 +255,7 @@ public class Vectores {
     }
 
     public void practica1 () {
-
-        Scanner entrada = new Scanner(System.in);
+        Scanner entrada = new Scanner(System.in); //Declaro las variables que voy a usar.
         Random aleatorio = new Random();
         int primero = aleatorio.nextInt(7);
         int valor1 = 0;
@@ -271,135 +270,122 @@ public class Vectores {
         int equipo2 = 0;
         int empate = 0;
 
-
-        System.out.println(primero);
+        System.out.println("El combate comienza con el Samurai número: " + (primero + 1));
 
         System.out.println("!! EQUIPO 1 ¡¡");
-
         while (suma1 != 30) {
-
-            System.out.print("Introduce la potencia de los samurais separada por espacios: ");
+            System.out.print("Introduce la potencia de los 7 samuráis separada por espacios: ");
             potencia1 = entrada.nextLine();
 
-            while ( (Integer.parseInt(potencia1) <1 || Integer.parseInt(potencia1) > 24) ) {
-                System.out.println("ERROR. La potencia del samurai debe estar entre 1 y 24. Introducela de nuevo: ");
-                potencia1 = entrada.nextLine();
+            String[] Vequipo1 = potencia1.split(" "); //Comprobamos que se introduzcan 7 caracteres.
+            if (Vequipo1.length != 7) {
+                System.out.println("ERROR. El equipo debe contar con 7 samuráis exactos.");
+                suma1 = 0;
+                continue;
             }
 
-
-            String Vequipo1 [] = potencia1.split (" ");
-
-            for (int i = 0; i < Vequipo1.length ; i++) {
-
-                valor1 = Integer.parseInt(Vequipo1 [i]);
-                suma1 += valor1;
-
-            }
-
-            if (suma1 != 30) {
-                if (Vequipo1.length != 7) {
-
-                    System.out.println("ERROR. El equipo debe contar con 7 samurais exactos.");
+            suma1 = 0;
+            for (int i = 0; i < Vequipo1.length; i++) {
+                try {
+                    valor1 = Integer.parseInt(Vequipo1[i]);
+                    if (valor1 < 1 || valor1 > 24) {
+                        System.out.println("ERROR. La potencia del samurái debe estar entre 1 y 24.");
+                        suma1 = 0;
+                        break;
+                    }
+                    suma1 += valor1;
+                } catch (NumberFormatException e) {
+                    System.out.println("ERROR. Entrada inválida. Solo se permiten números enteros.");
                     suma1 = 0;
-                    continue;
-
+                    break;
                 }
+            }
+
+            if (suma1 != 30 && suma1 != 0) {
                 System.out.println("ERROR. La potencia total no suma 30.");
                 suma1 = 0;
             }
         }
-        String Vequipo1 [] = potencia1.split (" ");
         System.out.println("Equipo 1 listo para el combate.");
 
-
-
         System.out.println("!! EQUIPO 2 ¡¡");
-
         while (suma2 != 30) {
-
-
-            System.out.print("Introduce la potencia de los samurais separada por espacios: ");
+            System.out.print("Introduce la potencia de los 7 samuráis separada por espacios: ");
             potencia2 = entrada.nextLine();
 
-            while ( (Integer.parseInt(potencia2) <1 || Integer.parseInt(potencia2) > 24) ) {
-                System.out.println("ERROR. La potencia del samurai debe estar entre 1 y 24. Introducela de nuevo: ");
-                potencia2 = entrada.nextLine();
+            String[] Vequipo2 = potencia2.split(" ");
+            if (Vequipo2.length != 7) {
+                System.out.println("ERROR. El equipo debe contar con 7 samuráis exactos.");
+                suma2 = 0;
+                continue;
             }
 
-            String Vequipo2 [] = potencia2.split (" ");
-
-
-
-            for (int i = 0; i < Vequipo2.length ; i++) {
-
-                valor2 = Integer.parseInt(Vequipo2 [i]);
-                suma2 = suma2 + valor2;
-
-            }
-
-            if (suma2 != 30) {
-
-                if (Vequipo2.length != 7) {
-                    System.out.println("ERROR. El equipo debe contar con 7 samurais exactos.");
+            suma2 = 0;
+            for (int i = 0; i < Vequipo2.length; i++) {
+                try {
+                    valor2 = Integer.parseInt(Vequipo2[i]);
+                    if (valor2 < 1 || valor2 > 24) {
+                        System.out.println("ERROR. La potencia del samurái debe estar entre 1 y 24.");
+                        suma2 = 0;
+                        break;
+                    }
+                    suma2 += valor2;
+                } catch (NumberFormatException e) {
+                    System.out.println("ERROR. Entrada inválida. Solo se permiten números enteros.");
                     suma2 = 0;
-                    continue;
+                    break;
                 }
+            }
 
+            if (suma2 != 30 && suma2 != 0) {
                 System.out.println("ERROR. La potencia total no suma 30.");
                 suma2 = 0;
             }
         }
-        String Vequipo2 [] = potencia2.split (" ");
         System.out.println("Equipo 2 listo para el combate.");
 
         System.out.println("!QUE COMIENCE EL COMBATE¡");
-
         System.out.println("La batalla empieza con el Samurai " + (primero + 1) + ".");
 
+        String[] Vequipo1 = potencia1.split(" ");
+        String[] Vequipo2 = potencia2.split(" ");
 
-        for (int i = 0; i < Vequipo1.length -1; i++) {
-
-            if (equipo1 >=4 || equipo2 >=4){
+        for (int i = 0; i < Vequipo1.length; i++) {
+            if (equipo1 >= 4 || equipo2 >= 4) {
                 break;
             }
 
-            if (primero == 7){
+            if (primero == 7) {
                 primero = 0;
             }
 
-            samurai1 = Integer.parseInt(Vequipo1 [primero]);
-            samurai2 = Integer.parseInt(Vequipo2 [primero]);
+            samurai1 = Integer.parseInt(Vequipo1[primero]);
+            samurai2 = Integer.parseInt(Vequipo2[primero]);
 
             System.out.print("Samurai " + (primero + 1) + ".");
-            if (samurai1 > samurai2){
-
-                System.out.println(" Gana el aquipo 1. " + samurai1 + " vs " + samurai2);
-                Vequipo2 [primero] = String.valueOf(0);
+            if (samurai1 > samurai2) {
+                System.out.println(" > Gana el equipo 1. " + samurai1 + " vs " + samurai2);
+                Vequipo2[primero] = String.valueOf(0);
                 equipo1++;
-                primero++;
-
             } else if (samurai1 < samurai2) {
-
-                System.out.println(" Gana el aquipo 2. " + samurai1 + " vs " + samurai2 );
-                Vequipo1 [primero] = String.valueOf(0);
+                System.out.println(" > Gana el equipo 2. " + samurai1 + " vs " + samurai2);
+                Vequipo1[primero] = String.valueOf(0);
                 equipo2++;
-                primero++;
-
             } else {
-                System.out.println(" Los samurais se han matado entre si. La ronda es un empate. " + samurai1 + " vs " + samurai2);
-                Vequipo1 [primero] = String.valueOf(0);
-                Vequipo2 [primero] = String.valueOf(0);
+                System.out.println(" > Los samuráis se han matado entre sí. Empate. " + samurai1 + " vs " + samurai2);
                 empate++;
-                primero++;
             }
+            primero++;
         }
 
         if (equipo1 > equipo2) {
-            System.out.println("!EQUIPO 1 GANA¡ Equipo 2 ha tenido " + equipo1 + " bajas.");
+            System.out.println("> !EQUIPO 1 GANA¡ Equipo 2 ha tenido " + equipo1 + " bajas.");
         } else if (equipo1 < equipo2) {
-            System.out.println("!EQUIPO 2 GANA¡ Equipo 1 ha tenido " + equipo2 + " bajas.");
-        }else {
-            System.out.println("!INEDITO¡!HEMOS TENIDO UN EMPATE¡ Parece que todos los samurais eran igual de poderosos.");
+            System.out.println("> !EQUIPO 2 GANA¡ Equipo 1 ha tenido " + equipo2 + " bajas.");
+        } else {
+            System.out.println("> ¡INÉDITO! ¡HEMOS TENIDO UN EMPATE! Parece que todos los samuráis eran igual de poderosos.");
         }
     }
 }
+
+
