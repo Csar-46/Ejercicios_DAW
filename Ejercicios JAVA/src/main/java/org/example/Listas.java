@@ -88,5 +88,7 @@ public class Listas {
             par_sorteo = "Impar";
         }
 
+        System.out.println("El ganador es el: " + num_random + " " + color_sorteo + " " + par_sorteo);
+
     }
 }
