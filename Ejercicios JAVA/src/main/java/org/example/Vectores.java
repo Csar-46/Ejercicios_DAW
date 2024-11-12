@@ -369,6 +369,36 @@ public class Vectores {
             System.out.println("¡INÉDITO! ¡HEMOS TENIDO UN EMPATE! Parece que todos los samuráis eran igual de poderosos.");
         }
     }
+
+    public void navidad () {
+
+        Scanner entrada = new Scanner(System.in);
+
+        final String palabra = "NAVIDAD";
+
+        System.out.println("Introduce cuantas leras quieres añadir...");
+        String cantidad = entrada.nextLine();
+
+        String cantidades [] = cantidad.split(" ");
+        String letras [] = palabra.split("");
+
+        System.out.println(Arrays.toString(cantidades));
+        System.out.println(Arrays.toString(letras));
+
+        String resultado = "";
+
+        for (int i = 0; i < letras.length; i++) {
+
+            for (int j = 0 ; j < Integer.parseInt(cantidades[i]) ; j++) {
+
+                resultado = resultado.concat(letras[i]);
+
+            }
+        }
+
+        System.out.println(resultado);
+
+    }
 }
 
 

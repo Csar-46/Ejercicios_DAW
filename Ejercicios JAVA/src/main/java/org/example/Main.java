@@ -7,8 +7,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Vectores ejercicios = new Vectores();
-        ejercicios.practica1();
+        Listas ejercicios = new Listas();
+        ejercicios.ejercicio0();
 
     }
 }
