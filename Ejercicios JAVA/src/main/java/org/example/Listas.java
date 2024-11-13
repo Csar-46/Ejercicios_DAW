@@ -90,5 +90,18 @@ public class Listas {
 
         System.out.println("El ganador es el: " + num_random + " " + color_sorteo + " " + par_sorteo);
 
+        if ((numero != 0) && (num_random == numero) && color_sorteo.equals(colores) && par_sorteo.equals(pares)) {
+            System.out.println("¡HAS GANADO!");
+        } else if (numero != 0 && color_sorteo.equals(colores)) {
+            System.out.println("Has acertado el color.");
+        } else if (numero != 0 && par_sorteo.equals(pares)) {
+            System.out.println("Has acertado si es par / impar.");
+        } else if (numero == num_random && numero != 0) {
+            System.out.println("Has acertado el número.");
+        } else if (numero == 0 && num_random == 0) {
+            System.out.println("¡HAS GANADO TODO Y LOS DEMÁS PARA CASITA PELAOS!");
+        } else {
+            System.out.println("Has perdido.");
+        }
     }
 }
