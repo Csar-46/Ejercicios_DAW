@@ -399,6 +399,142 @@ public class Vectores {
         System.out.println(resultado);
 
     }
+
+    public void ordenar () {
+
+        int numeros[] = {3, 1, 54, 17, 8};
+        System.out.println(Arrays.toString(numeros));
+
+        Arrays.sort(numeros); //Ordena de menor a mayor
+        System.out.println(Arrays.toString(numeros));
+
+    }
+
+    public void BuscarNum () {
+
+        int numeros[] = {3, 1, 54, 17, 8};
+        System.out.println("> Array sin ordenar: " + Arrays.toString(numeros));
+
+        Arrays.sort(numeros);
+        System.out.println("> Array ordenado: " + Arrays.toString(numeros));
+
+        int num = 54;
+
+        int posicion = Arrays.binarySearch(numeros,num); //Busca en que posicion del vector (numeros) esta el numero indicado (num)
+
+        if (posicion < 0) {
+            System.out.println("> El número " + num + " no está en el array");
+        } else {
+            System.out.println("> La posición del número " + num + " es: " + posicion);
+        }
+    }
+
+    public void EliminarDuplicado () {
+
+        //Metodo facil. El comando de debajo devuelve el vector que sea sin duplicados y ordenado.
+        // int vector [] = {2, 2, 4, 4, 7, 9}
+        // int vector2 [] = Arrays.stream(vector).distinct().toArray();
+
+
+        int[] original = {2, 2, 4, 4, 7, 9};
+        System.out.println("> Array original: " + Arrays.toString(original));
+
+        int auxiliar[] = new int[original.length];
+
+        int tamanyo = 0;
+
+        for (int i = 0; i < original.length; i++) {
+            // original[i] == original [i+1]
+            if (i!= original.length - 1 && original[i] == original[i+1]){
+                System.out.println("> Se ha encontrado un número duplicado: " + original[i]);
+            } else {
+                auxiliar [i] = original [i];
+                tamanyo++;
+            }
+        }
+        System.out.println("> Array auxiliar: " + Arrays.toString(auxiliar));
+
+        int limpio[] = new int[tamanyo];
+        int pos = 0;
+
+
+        for (int i = 0; i < auxiliar.length; i++) {
+
+            if (auxiliar[i]!= 0){
+                if (auxiliar[i] != 0){
+                    limpio[pos] = auxiliar[i];
+                    pos++;
+                }
+            }
+        }
+        System.out.println("> Array limpio: " + Arrays.toString(limpio));
+    } //Eliminar duplicados con vector auxiliar
+
+    public void EliminarDuplicadoV2() {
+
+        int[] original = {2, 2, 4, 4, 7, 9};
+        System.out.println("> Array original: " + Arrays.toString(original));
+
+        int tamanyo = 0;
+
+        for (int i = 0; i < original.length; i++) {
+            // original[i] == original [i+1]
+            if (i!= original.length - 1 && original[i] == original[i+1]){
+                System.out.println("> Se ha encontrado un número duplicado: " + original[i]);
+                original [i] = 0;
+            } else {
+                tamanyo++;
+            }
+        }
+        System.out.println("> Array auxiliar: " + Arrays.toString(original));
+
+        int limpio[] = new int[tamanyo];
+        int pos = 0;
+
+
+        for (int i = 0; i < original.length; i++) {
+
+            if (original[i]!= 0){
+
+                limpio[pos] = original[i];
+                pos++;
+
+            }
+        }
+        System.out.println("> Array limpio: " + Arrays.toString(limpio));
+    } //Eliminar duplicados sin vector auxiliar
+
+    public void EliminarDuplicadoV3() {
+
+        int[] original = {2, 2, 4, 4, 7, 9};
+        System.out.println("> Array original: " + Arrays.toString(original));
+
+        Random aleatorio = new Random();
+
+        int tamanyo = 0;
+
+        boolean repetir = true;
+
+        while (repetir) {
+            repetir = false;
+            for (int i = 0; i < original.length; i++) {
+                // original[i] == original [i+1]
+                if (i != original.length - 1 && original[i] == original[i + 1]) {
+                    System.out.println("> Se ha encontrado un número duplicado: " + original[i]);
+                    original[i] = aleatorio.nextInt(49) + 1;
+                    repetir = true;
+                }
+            }
+            Arrays.sort(original);
+        }
+        System.out.println(Arrays.toString(original));
+    } //Eliminar duplicados dando un valor aleatorio al valor reemplazado
+
+    public void practica2 () {
+
+        
+
+    }
 }
 
 
