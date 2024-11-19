@@ -532,8 +532,44 @@ public class Vectores {
 
     public void practica2 () {
 
-        
+        Scanner entrada = new Scanner(System.in);
+        Random aleatorio = new Random ();
 
+        boolean repetir = true;
+        String[] combinacion;
+        int[] sorteo = new int [6];
+        int reintegro = aleatorio.nextInt(10);
+        int complmento = aleatorio.nextInt(50);
+
+        System.out.println("> Introduce los datos de tu boleto:");
+        String numeros = entrada.nextLine();
+
+        boolean error = numeros.matches("\\d{1,2}-\\d{1,2}-\\d{1,2}-\\d{1,2}-\\d{1,2}-\\d{1,2}/\\d");
+
+        if (!error) {
+            System.out.println("EL FORMATO ES INCORRECTO.");
+            return;
+        }
+
+        combinacion= numeros.split("-/");
+        System.out.println(Arrays.toString(combinacion));
+
+        System.out.println(combinacion.length);
+        System.out.println(sorteo.length);
+        while (repetir) {
+            repetir = false;
+            for (int i = 0; i < sorteo.length; i++) {
+                // original[i] == original [i+1]
+                if (i != sorteo.length - 1 && sorteo[i] == sorteo[i + 1]) {
+                    sorteo[i] = aleatorio.nextInt(49) + 1;
+                    if (Integer.valueOf(sorteo[i]) == complmento){
+                        complmento = aleatorio.nextInt(50);
+                    }
+                    repetir = true;
+                }
+            }
+        }
+        System.out.println(Arrays.toString(sorteo));
     }
 }
 
