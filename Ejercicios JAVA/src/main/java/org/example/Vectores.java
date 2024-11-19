@@ -538,8 +538,8 @@ public class Vectores {
         boolean repetir = true;
         String[] combinacion;
         int[] sorteo = new int [6];
+        int ReintegroUsuario;
         int reintegro = aleatorio.nextInt(10);
-        int complmento = aleatorio.nextInt(50);
 
         System.out.println("> Introduce los datos de tu boleto:");
         String numeros = entrada.nextLine();
@@ -551,25 +551,52 @@ public class Vectores {
             return;
         }
 
-        combinacion= numeros.split("-/");
-        System.out.println(Arrays.toString(combinacion));
+        combinacion= numeros.split("[-/]");
+        ReintegroUsuario = Integer.parseInt(combinacion[combinacion.length - 1]);
 
-        System.out.println(combinacion.length);
-        System.out.println(sorteo.length);
+        int[] NumerosPrimitiva = new int[6];
+        for (int i = 0; i < 6; i++) {
+            NumerosPrimitiva[i] = Integer.parseInt(combinacion[i]);
+        }
+
+        for (int i = 0; i < sorteo.length; i++) {
+            sorteo[i] = aleatorio.nextInt(49) + 1;
+        }
+
         while (repetir) {
             repetir = false;
-            for (int i = 0; i < sorteo.length; i++) {
-                // original[i] == original [i+1]
-                if (i != sorteo.length - 1 && sorteo[i] == sorteo[i + 1]) {
-                    sorteo[i] = aleatorio.nextInt(49) + 1;
-                    if (Integer.valueOf(sorteo[i]) == complmento){
-                        complmento = aleatorio.nextInt(50);
+            for (int i = 0; i < sorteo.length - 1; i++) {
+                for (int j = i + 1; j < sorteo.length; j++) {
+                    if (sorteo[i] == sorteo[j]) {
+                        sorteo[j] = aleatorio.nextInt(49) + 1;
+                        repetir = true;
                     }
-                    repetir = true;
                 }
             }
         }
+
+        int complemento;
+        boolean error2;
+
+        do {
+            complemento = aleatorio.nextInt(49) + 1;
+            error2 = true;
+
+            // Verificamos si complemento ya está en sorteo
+            for (int i = 0; i < sorteo.length; i++) {
+                if (sorteo[i] == complemento) {
+                    error2 = false;
+                    break;
+                }
+            }
+        } while (!error2);
+
+        System.out.println("HA SALIDO:");
+
+        //System.out.println("Números: " + Arrays.toString(Arrays.copyOf(combinacion, combinacion.length - 1)));
         System.out.println(Arrays.toString(sorteo));
+        System.out.println("Complementario: " + complemento);
+        System.out.println("Reintegro: " + reintegro);
     }
 }
 
