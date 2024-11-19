@@ -540,6 +540,11 @@ public class Vectores {
         int[] sorteo = new int [6];
         int ReintegroUsuario;
         int reintegro = aleatorio.nextInt(10);
+        int complemento;
+        boolean error2;
+        int aciertos = 0;
+        int comp = 0;
+
 
         System.out.println("> Introduce los datos de tu boleto:");
         String numeros = entrada.nextLine();
@@ -574,10 +579,7 @@ public class Vectores {
                 }
             }
         }
-
-        int complemento;
-        boolean error2;
-
+        
         do {
             complemento = aleatorio.nextInt(49) + 1;
             error2 = true;
@@ -592,11 +594,54 @@ public class Vectores {
         } while (!error2);
 
         System.out.println("HA SALIDO:");
-
-        //System.out.println("Números: " + Arrays.toString(Arrays.copyOf(combinacion, combinacion.length - 1)));
         System.out.println(Arrays.toString(sorteo));
         System.out.println("Complementario: " + complemento);
         System.out.println("Reintegro: " + reintegro);
+
+
+        for (int i = 0; i < NumerosPrimitiva.length; i++) {
+            for (int j = 0; j < sorteo.length; j++) {
+                if (NumerosPrimitiva[i] == sorteo[j]) {
+                    aciertos++;
+                    sorteo[j] = -1; // Marcamos el número como "usado" para evitar contarlo de nuevo
+                    break;
+                }
+            }
+        }
+
+
+        for (int i = 0; i < NumerosPrimitiva.length; i++) {
+            if (NumerosPrimitiva[i] == complemento) {
+                comp = 1;
+                break;
+            }
+        }
+
+
+        if (ReintegroUsuario == reintegro) {
+            aciertos++;
+        }
+
+        System.out.println("EL RESULTADO DEL SORTEO ES.......");
+
+        if (aciertos == 6 && ReintegroUsuario == reintegro) {
+            System.out.println("¡¡¡Categoría Especial: acertaste los seis números y el reintegro!!!");
+        } else if (aciertos == 6) {
+            System.out.println("1ª Categoría: acertaste los seis números.");
+        } else if (aciertos == 5 && comp == 1) {
+            System.out.println("2ª Categoría: acertaste cinco números y el número complementario.");
+        } else if (aciertos == 5) {
+            System.out.println("3ª Categoría: acertaste cinco números.");
+        } else if (aciertos == 4) {
+            System.out.println("4ª Categoría: acertaste cuatro números.");
+        } else if (aciertos == 3) {
+            System.out.println("5ª Categoría: acertaste tres números.");
+        } else if (ReintegroUsuario == reintegro) {
+            System.out.println("Reintegro: acertaste el número del reintegro.");
+        } else {
+            System.out.println("No premiado.");
+        }
+
     }
 }
 
