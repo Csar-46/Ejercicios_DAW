@@ -673,6 +673,31 @@ public class Vectores {
         //ENHORABUENA, YA ERES TIENES TU TITULO DE LUDOPATA!
 
     }
+
+    public void primos () {
+
+        Scanner entrada = new Scanner(System.in);
+
+        System.out.println("Introduce m: ");
+
+        int m = entrada.nextInt();
+
+        System.out.println("Primos: ");
+
+        antonio:
+        for (int i = 2; i <= m ; i++) {
+
+            for (int j = i-1; j >= 2 ; j--) {
+
+                if (i%j == 0){
+                    continue antonio;
+                }
+            }
+
+            System.out.print(i + " ");
+
+        }
+    }
 }
 
 
