@@ -535,7 +535,7 @@ public class Vectores {
         Scanner entrada = new Scanner(System.in);
         Random aleatorio = new Random ();
 
-        boolean repetir = true;
+        boolean repetir = true; //Declaramos las variables
         String[] combinacion;
         int[] sorteo = new int [6];
         int ReintegroUsuario;
@@ -544,30 +544,50 @@ public class Vectores {
         boolean error2;
         int aciertos = 0;
         int comp = 0;
+        int[] NumerosPrimitiva = new int[6];
 
 
-        System.out.println("> Introduce los datos de tu boleto:");
+        System.out.println("> Introduce los datos de tu boleto:"); //Pedimos la combiación de la primitiva.
         String numeros = entrada.nextLine();
 
+        //Controlamos el formato de entrada con el .maches
         boolean error = numeros.matches("\\d{1,2}-\\d{1,2}-\\d{1,2}-\\d{1,2}-\\d{1,2}-\\d{1,2}/\\d");
 
+        //Si el formato es incorrecto, entra aqui y termia el programa.
         if (!error) {
             System.out.println("EL FORMATO ES INCORRECTO.");
             return;
         }
 
+        //Separamos la array con . split y guardamos el reintegro en una variable.
         combinacion= numeros.split("[-/]");
         ReintegroUsuario = Integer.parseInt(combinacion[combinacion.length - 1]);
 
-        int[] NumerosPrimitiva = new int[6];
+
+        //Comprobamos que los numeros esten en el rango que queremos.
+        for (int i = 0; i < 6; i++) {
+            NumerosPrimitiva[i] = Integer.parseInt(combinacion[i]);
+            if (NumerosPrimitiva[i] < 1 || NumerosPrimitiva[i] > 49) {
+                System.out.println("ERROR. Números no válidos.");
+                return;
+            }
+        }
+
+
+        //Rellenamos una array nueva de tipo numerico con los valores ue tenemos el la array String combinacion.
         for (int i = 0; i < 6; i++) {
             NumerosPrimitiva[i] = Integer.parseInt(combinacion[i]);
         }
 
+
+        //Generamos la array del sorteo con numeros aleatorios.
         for (int i = 0; i < sorteo.length; i++) {
             sorteo[i] = aleatorio.nextInt(49) + 1;
         }
 
+
+        //Comprobamos que no hayan numeros repetidos con este buble anidado.
+        //En caso de que se encuentre un numero repetido lo recalculamos
         while (repetir) {
             repetir = false;
             for (int i = 0; i < sorteo.length - 1; i++) {
@@ -579,12 +599,13 @@ public class Vectores {
                 }
             }
         }
-        
+
+
+        // Comprobamos si el complemento ya está en sorteo para que no se repita.
         do {
             complemento = aleatorio.nextInt(49) + 1;
             error2 = true;
 
-            // Verificamos si complemento ya está en sorteo
             for (int i = 0; i < sorteo.length; i++) {
                 if (sorteo[i] == complemento) {
                     error2 = false;
@@ -593,12 +614,15 @@ public class Vectores {
             }
         } while (!error2);
 
+
+        //Mostramos por pantalla el resultado de los sorteos.
         System.out.println("HA SALIDO:");
         System.out.println(Arrays.toString(sorteo));
         System.out.println("Complementario: " + complemento);
         System.out.println("Reintegro: " + reintegro);
 
 
+        //Calculamos el numero de aciertos comparando las dos arrays
         for (int i = 0; i < NumerosPrimitiva.length; i++) {
             for (int j = 0; j < sorteo.length; j++) {
                 if (NumerosPrimitiva[i] == sorteo[j]) {
@@ -610,6 +634,7 @@ public class Vectores {
         }
 
 
+        //Comprobamos si hemos acertado el complemento.
         for (int i = 0; i < NumerosPrimitiva.length; i++) {
             if (NumerosPrimitiva[i] == complemento) {
                 comp = 1;
@@ -618,12 +643,15 @@ public class Vectores {
         }
 
 
+        //Comprobamos si hemos acertado el reintegro
         if (ReintegroUsuario == reintegro) {
             aciertos++;
         }
 
         System.out.println("EL RESULTADO DEL SORTEO ES.......");
 
+
+        //Repartimos premios segun los aciertos.
         if (aciertos == 6 && ReintegroUsuario == reintegro) {
             System.out.println("¡¡¡Categoría Especial: acertaste los seis números y el reintegro!!!");
         } else if (aciertos == 6) {
@@ -641,6 +669,8 @@ public class Vectores {
         } else {
             System.out.println("No premiado.");
         }
+
+        //ENHORABUENA, YA ERES TIENES TU TITULO DE LUDOPATA!
 
     }
 }
