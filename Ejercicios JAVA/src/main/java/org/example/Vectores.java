@@ -239,6 +239,14 @@ public class Vectores {
 
     }
 
+    public void ejercicio6 () {
+
+        Scanner entrada = new Scanner(System.in);
+
+        
+
+    }
+
     public void vectores_evo () {
 
         String palabras [] = {"Paco", "Pepe", "Juan", "Maria"};
