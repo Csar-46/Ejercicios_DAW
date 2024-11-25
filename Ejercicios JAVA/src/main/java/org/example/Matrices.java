@@ -5,6 +5,8 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
+import static java.util.regex.Pattern.matches;
+
 public class Matrices {
 
     public void clase0() {
@@ -437,7 +439,6 @@ public class Matrices {
 
             } catch (InputMismatchException e) {
                 System.out.println("ERROR. Valores no validos...");
-                error = true;
             }
         }
 
@@ -447,7 +448,22 @@ public class Matrices {
             for (int i = 0; i < matriz.length; i++) {
 
                 System.out.println("Introduce la fila " + (i + 1) + ": ");
-                String valor_fila [] = entrada.next().split("");
+                String texto_fila = entrada.next();
+                boolean formato = texto_fila.matches("[a-zA-Z]+");
+
+                String valor_fila [] = texto_fila.split("");
+
+                if (!formato){
+                    System.out.println("Los valores introducidos son incorrectos");
+                    return;
+                }
+
+
+                if (valor_fila.length != filas){
+                    System.out.println("La cantidad de valores introducidos es incorrecta");
+                    return;
+                }
+
 
                 for (int j = 0; j < matriz[i].length; j++) {
 
