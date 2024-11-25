@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -71,12 +72,12 @@ public class Matrices {
         for (int i = 0; i < m.length; i++) {
             for (int j = 0; j < m[i].length; j++) {
 
-
                 if (m[i][j] == 1){
                     System.out.print("X ");
                 }else {
                     System.out.print("- ");
                 }
+
             }
             System.out.println("\n");
         }
@@ -412,23 +413,57 @@ public class Matrices {
         }
     }
 
-    public void vectores_matriz2 () {
+    public void practica1 () {
 
         Scanner entrada  = new Scanner(System.in);
 
-        String matriz [][] = new String[10][10];
+        int filas = 0;
+        int columnas = 0;
+        String busqueda = "";
+        boolean error = true;
+        boolean coincide = true;
 
-        for (int i = 0; i < matriz.length; i++) {
 
-            System.out.println("Introduce la fila " + i + ": ");
-            String valor_fila [] = entrada.next().split("");
+        while (error) {
+            try {
 
-            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.println("Introduce el número de filas: ");
+                filas = entrada.nextInt();
 
-                matriz[i][j] = valor_fila[j];
+                System.out.println("Introduce el número de columnas: ");
+                columnas = entrada.nextInt();
 
+                error = false;
+
+            } catch (InputMismatchException e) {
+                System.out.println("ERROR. Valores no validos...");
+                error = true;
             }
         }
+
+        String matriz [][] = new String[filas][columnas];
+
+        try {
+            for (int i = 0; i < matriz.length; i++) {
+
+                System.out.println("Introduce la fila " + (i + 1) + ": ");
+                String valor_fila [] = entrada.next().split("");
+
+                for (int j = 0; j < matriz[i].length; j++) {
+
+                    matriz[i][j] = valor_fila[j];
+
+                }
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("ERROR, introduce datos válidos (a-z,A-Z)");
+            return;
+        }
+
+        System.out.println("Introduce la palabra que quieras buscar: ");
+        busqueda = entrada.next();
+
+        String palabra [] = busqueda.split("");
 
         for (String[] x : matriz){
 
@@ -438,5 +473,55 @@ public class Matrices {
             System.out.println("\n");
         }
 
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+
+                if (j + palabra.length <= matriz[i].length) {
+                    coincide = true;
+                }
+
+
+                for (int k = 0; k < palabra.length; k++) {
+                        if (!matriz[i][j + k].equals(palabra[k])){
+
+                            coincide = false;
+                            break;
+
+                        }
+                }
+
+                if (coincide) {
+
+                    System.out.println("Palabra encontrada!! Su posición inicial es: (" + i + ", " + j +"). Su posición final es: (" + i + ", " + palabra.length + ")");
+
+                }
+            }
+        }
+
+        for (int i = 0; i < matriz[0].length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+
+                if (j + palabra.length <= matriz[i].length) {
+                    coincide = true;
+                }
+
+
+                for (int k = 0; k < palabra.length - 1; k++) {
+                    if (!matriz[i + k][j].equals(palabra[k])){
+
+                        coincide = false;
+                        break;
+
+                    }
+                }
+
+                if (coincide) {
+
+                    System.out.println("Palabra encontrada!! Su posición inicial es: (" + i + ", " + j +"). Su posición final es: (" + i + ", " + palabra.length + ")");
+
+                }
+            }
+        }
     }
 }
+
