@@ -426,6 +426,7 @@ public class Matrices {
         boolean coincide = true;
 
 
+
         while (error) {
             try {
 
@@ -438,7 +439,9 @@ public class Matrices {
                 error = false;
 
             } catch (InputMismatchException e) {
-                System.out.println("ERROR. Valores no validos...");
+                System.err.println("ERROR. Valores no validos...");
+                entrada.nextLine();
+
             }
         }
 
@@ -447,29 +450,37 @@ public class Matrices {
         try {
             for (int i = 0; i < matriz.length; i++) {
 
+                String valor_fila[];
                 System.out.println("Introduce la fila " + (i + 1) + ": ");
                 String texto_fila = entrada.next();
                 boolean formato = texto_fila.matches("[a-zA-Z]+");
 
-                String valor_fila [] = texto_fila.split("");
+                valor_fila = texto_fila.split("");
 
-                if (!formato){
-                    System.out.println("Los valores introducidos son incorrectos");
-                    return;
+                if (!formato) {
+                    System.err.println("ERROR, introduce datos válidos (a-z,A-Z).");
+                    i--;
+                    continue;
                 }
 
-
-                if (valor_fila.length != filas){
-                    System.out.println("La cantidad de valores introducidos es incorrecta");
-                    return;
+                if (valor_fila.length != filas) {
+                    System.err.println("ERROR. La cantidad de valores introducidos es incorrecta.");
+                    i--;
+                    continue;
                 }
 
+                if (valor_fila.length != columnas) {
+                    System.err.println("ERROR. La cantidad de valores introducidos es incorrecta.");
+                    i--;
+                    continue;
+                }
 
                 for (int j = 0; j < matriz[i].length; j++) {
 
                     matriz[i][j] = valor_fila[j];
 
                 }
+
             }
         } catch (InputMismatchException e) {
             System.out.println("ERROR, introduce datos válidos (a-z,A-Z)");
@@ -492,12 +503,11 @@ public class Matrices {
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
 
-                if (j + palabra.length <= matriz[i].length) {
-                    coincide = true;
+                if (i + palabra.length > matriz[i].length) {
+                    continue;
                 }
 
-
-                for (int k = 0; k < palabra.length; k++) {
+                for (int k = 0; k < palabra.length - 1; k++) {
                         if (!matriz[i][j + k].equals(palabra[k])){
 
                             coincide = false;
@@ -538,6 +548,31 @@ public class Matrices {
                 }
             }
         }
+
+        for (int i = matriz.length ; i >0 ; i--) {
+            for (int j = matriz[0].length; j > 0 ; j--) {
+
+                if (i + palabra.length <= matriz[0].length) {
+                    coincide = false;
+                }
+
+                for (int k = 0; k < palabra.length; k++) {
+                    if (!matriz[i][j - k].equals(palabra[k])){
+
+                        coincide = false;
+                        break;
+
+                    }
+                }
+
+                if (coincide) {
+
+                    System.out.println("Palabra encontrada!! Su posición inicial es: (" + i + ", " + j +"). Su posición final es: (" + i + ", " + palabra.length + ")");
+
+                }
+            }
+        }
+
     }
 }
 
