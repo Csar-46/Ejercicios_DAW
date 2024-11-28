@@ -455,7 +455,7 @@ public class Matrices {
             }
         }
 
-        //Creamos la matriz con el tamaño indicado por el usiatio
+        //Creamos la matriz con el tamaño indicado por el usuario
         String matriz [][] = new String[filas][columnas];
 
         //La rellenamos con los valores indicados fila por fila
@@ -468,12 +468,14 @@ public class Matrices {
 
             valor_fila = texto_fila.split("");
 
+            //Controlamos que el formato sea correcto.
             if (!formato) {
                 System.err.println("ERROR, introduce datos válidos (a-z,A-Z).");
                 i--;
                 continue;
             }
 
+            //Comprobamos que la cantidad de valores introducidos sea correcto.
             if (valor_fila.length != filas) {
                 System.err.println("ERROR. La cantidad de valores introducidos es incorrecta.");
                 return;
