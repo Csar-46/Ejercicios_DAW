@@ -425,6 +425,8 @@ public class Matrices {
         boolean error = true;
         boolean error2 = true;
 
+
+        //Pedimos filas y columnasd e la matriz y controlamos que los datos no sean erroneos.
         while (error) {
             try {
 
@@ -453,8 +455,10 @@ public class Matrices {
             }
         }
 
+        //Creamos la matriz con el tamaño indicado por el usiatio
         String matriz [][] = new String[filas][columnas];
 
+        //La rellenamos con los valores indicados fila por fila
         for (int i = 0; i < matriz.length; i++) {
 
             String valor_fila[];
@@ -484,7 +488,11 @@ public class Matrices {
 
         while (error2) {
             System.out.println("Introduce la palabra que quieres buscar: ");
+
+            //Introducimos la palabra
             busqueda = entrada.next();
+
+            //Comprobamos que contenga solo letras con .matches
             if (!busqueda.matches("[a-zA-Z]+")) {
                 System.err.println("ERROR. La palabra debe contener solo letras.");
             } else {
@@ -492,8 +500,10 @@ public class Matrices {
             }
         }
 
+        //Pasabmos la pablabra a vector para poder recorrerlo mas adelante
         String palabra [] = busqueda.split("");
 
+        //Con este bucle imprimimos la matriz por pantalla
         for (String[] x : matriz){
 
             for (String y : x){
@@ -502,46 +512,62 @@ public class Matrices {
             System.out.println("\n");
         }
 
+        //Comenzamos a buscar.
+
+        //Con los dos bucles recorremos cada posicion de la matriz de derecha a izquierda comenzando en (0,0)
         for (int i = 0; i < matriz.length; i++) {
+            //Controlamos que no se salga del limite de la matriz con la condicion de este.
             for (int j = 0; j <= matriz[i].length - palabra.length; j++) {
 
+                //Si encuentra la primera letra de la palabra indicaca comienza a buscar.
                 if (matriz[i][j].equalsIgnoreCase(palabra[0])) {
 
+                    //HORIZONTAL DE DERECHA A IZQUIERDA
+                    //Solo busca si la palabra cabe hacia la derecha.
                     if (j + palabra.length <= matriz[i].length) {
 
-                        boolean coincide = true;
+                        boolean encontrada = true;
 
+                        //En caso de que quepa, comparamos con la palabra originar gracias al bucle de abajo.
                         for (int k = 0; k < palabra.length; k++) {
 
+                            //En caso de que alguna letra no coincida controlamos con un booleano y salimos del bucle.
                             if (!matriz[i][j + k].equalsIgnoreCase(palabra[k])) {
-                                coincide = false;
+                                encontrada = false;
                                 break;
                             }
 
                         }
 
-                        if (coincide) {
+                        //En caso de coincidir el booleano se mantiene con su valor inicial y muestra donde comienza la palabra.
+                        if (encontrada) {
 
                             System.out.println("Palabra encontrada hacia la derecha! Inicio: (" + i + ", " + j + ")");
 
                         }
                     }
 
+                    //BUSQUEDA HACIA ABAJO.
+
+                    //Comienza solo si la palabra cabe en esta dirrección.
                     if (i + palabra.length <= matriz.length) {
 
-                        boolean coincide = true;
+                        boolean encontrada = true;
 
+                        //Una vez mas comparamos letra a letra la palabra indicada para ver si es correcta.
                         for (int k = 0; k < palabra.length; k++) {
 
                             if (!matriz[i + k][j].equalsIgnoreCase(palabra[k])) {
 
-                                coincide = false;
+                                //Si no coindcide alguna letra sale del bucle y deja de comparar.
+                                encontrada = false;
                                 break;
 
                             }
                         }
 
-                        if (coincide) {
+                        //En caso de si encontrarla la variable se mantiene e indica donde inicia la palabra.
+                        if (encontrada) {
 
                             System.out.println("Palabra encontrada hacia abajo! Inicio: (" + i + ", " + j + ")");
 
@@ -549,7 +575,9 @@ public class Matrices {
                     }
                 }
 
-                if (i + palabra.length <= matriz.length && j + palabra.length <= matriz[i].length) {
+                //EXTRA
+                //Busqueda de la palabra en diaghonal abajo-derecha
+                if (i + palabra.length <= matriz.length && j + palabra.length <= matriz[i].length) { //Busqueda de la palabra en diaghonal abajo-derecha
                     boolean coincide = true;
 
                     for (int k = 0; k < palabra.length; k++) {
