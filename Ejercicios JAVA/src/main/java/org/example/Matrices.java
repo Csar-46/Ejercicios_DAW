@@ -423,9 +423,7 @@ public class Matrices {
         int columnas = 0;
         String busqueda = "";
         boolean error = true;
-        boolean coincide = true;
-
-
+        boolean error2 = true;
 
         while (error) {
             try {
@@ -433,8 +431,18 @@ public class Matrices {
                 System.out.println("Introduce el número de filas: ");
                 filas = entrada.nextInt();
 
+                if (filas <= 0){
+                    System.err.println("ERROR. Introduce valores mayores que 0.");
+                    continue;
+                }
+
                 System.out.println("Introduce el número de columnas: ");
                 columnas = entrada.nextInt();
+
+                if (columnas <= 0){
+                    System.err.println("ERROR. Introduce valores mayores que 0.");
+                    continue;
+                }
 
                 error = false;
 
@@ -447,48 +455,42 @@ public class Matrices {
 
         String matriz [][] = new String[filas][columnas];
 
-        try {
-            for (int i = 0; i < matriz.length; i++) {
+        for (int i = 0; i < matriz.length; i++) {
 
-                String valor_fila[];
-                System.out.println("Introduce la fila " + (i + 1) + ": ");
-                String texto_fila = entrada.next();
-                boolean formato = texto_fila.matches("[a-zA-Z]+");
+            String valor_fila[];
+            System.out.println("Introduce la fila " + (i + 1) + ": ");
+            String texto_fila = entrada.next();
+            boolean formato = texto_fila.matches("[a-zA-Z]+");
 
-                valor_fila = texto_fila.split("");
+            valor_fila = texto_fila.split("");
 
-                if (!formato) {
-                    System.err.println("ERROR, introduce datos válidos (a-z,A-Z).");
-                    i--;
-                    continue;
-                }
+            if (!formato) {
+                System.err.println("ERROR, introduce datos válidos (a-z,A-Z).");
+                i--;
+                continue;
+            }
 
-                if (valor_fila.length != filas) {
-                    System.err.println("ERROR. La cantidad de valores introducidos es incorrecta.");
-                    i--;
-                    continue;
-                }
+            if (valor_fila.length != filas) {
+                System.err.println("ERROR. La cantidad de valores introducidos es incorrecta.");
+                return;
+            }
 
-                if (valor_fila.length != columnas) {
-                    System.err.println("ERROR. La cantidad de valores introducidos es incorrecta.");
-                    i--;
-                    continue;
-                }
+            for (int j = 0; j < matriz[i].length; j++) {
 
-                for (int j = 0; j < matriz[i].length; j++) {
-
-                    matriz[i][j] = valor_fila[j];
-
-                }
+                matriz[i][j] = valor_fila[j];
 
             }
-        } catch (InputMismatchException e) {
-            System.out.println("ERROR, introduce datos válidos (a-z,A-Z)");
-            return;
         }
 
-        System.out.println("Introduce la palabra que quieras buscar: ");
-        busqueda = entrada.next();
+        while (error2) {
+            System.out.println("Introduce la palabra que quieres buscar: ");
+            busqueda = entrada.next();
+            if (!busqueda.matches("[a-zA-Z]+")) {
+                System.err.println("ERROR. La palabra debe contener solo letras.");
+            } else {
+                error2 = false;
+            }
+        }
 
         String palabra [] = busqueda.split("");
 
@@ -501,78 +503,72 @@ public class Matrices {
         }
 
         for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz[i].length; j++) {
+            for (int j = 0; j <= matriz[i].length - palabra.length; j++) {
 
-                if (i + palabra.length > matriz[i].length) {
-                    continue;
+                if (matriz[i][j].equalsIgnoreCase(palabra[0])) {
+
+                    if (j + palabra.length <= matriz[i].length) {
+
+                        boolean coincide = true;
+
+                        for (int k = 0; k < palabra.length; k++) {
+
+                            if (!matriz[i][j + k].equalsIgnoreCase(palabra[k])) {
+                                coincide = false;
+                                break;
+                            }
+
+                        }
+
+                        if (coincide) {
+
+                            System.out.println("Palabra encontrada hacia la derecha! Inicio: (" + i + ", " + j + ")");
+
+                        }
+                    }
+
+                    if (i + palabra.length <= matriz.length) {
+
+                        boolean coincide = true;
+
+                        for (int k = 0; k < palabra.length; k++) {
+
+                            if (!matriz[i + k][j].equalsIgnoreCase(palabra[k])) {
+
+                                coincide = false;
+                                break;
+
+                            }
+                        }
+
+                        if (coincide) {
+
+                            System.out.println("Palabra encontrada hacia abajo! Inicio: (" + i + ", " + j + ")");
+
+                        }
+                    }
                 }
 
-                for (int k = 0; k < palabra.length - 1; k++) {
-                        if (!matriz[i][j + k].equals(palabra[k])){
+                if (i + palabra.length <= matriz.length && j + palabra.length <= matriz[i].length) {
+                    boolean coincide = true;
+
+                    for (int k = 0; k < palabra.length; k++) {
+
+                        if (!matriz[i + k][j + k].equalsIgnoreCase(palabra[k])) {
 
                             coincide = false;
                             break;
 
                         }
-                }
+                    }
 
-                if (coincide) {
+                    if (coincide) {
 
-                    System.out.println("Palabra encontrada!! Su posición inicial es: (" + i + ", " + j +"). Su posición final es: (" + i + ", " + palabra.length + ")");
-
-                }
-            }
-        }
-
-        for (int i = 0; i < matriz[0].length; i++) {
-            for (int j = 0; j < matriz[i].length; j++) {
-
-                if (j + palabra.length <= matriz[i].length) {
-                    coincide = true;
-                }
-
-
-                for (int k = 0; k < palabra.length - 1; k++) {
-                    if (!matriz[i + k][j].equals(palabra[k])){
-
-                        coincide = false;
-                        break;
+                        System.out.println("Palabra encontrada diagonal derecha-abajo! Inicio: (" + i + ", " + j + ")");
 
                     }
                 }
-
-                if (coincide) {
-
-                    System.out.println("Palabra encontrada!! Su posición inicial es: (" + i + ", " + j +"). Su posición final es: (" + i + ", " + palabra.length + ")");
-
-                }
             }
         }
-
-        for (int i = matriz.length ; i >0 ; i--) {
-            for (int j = matriz[0].length; j > 0 ; j--) {
-
-                if (i + palabra.length <= matriz[0].length) {
-                    coincide = false;
-                }
-
-                for (int k = 0; k < palabra.length; k++) {
-                    if (!matriz[i][j - k].equals(palabra[k])){
-
-                        coincide = false;
-                        break;
-
-                    }
-                }
-
-                if (coincide) {
-
-                    System.out.println("Palabra encontrada!! Su posición inicial es: (" + i + ", " + j +"). Su posición final es: (" + i + ", " + palabra.length + ")");
-
-                }
-            }
-        }
-
     }
 }
-
