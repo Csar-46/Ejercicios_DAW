@@ -3,25 +3,41 @@ package org.example;
 import javax.sound.midi.Soundbank;
 import java.util.Scanner;
 
+/**
+ * Clase para calcular el rumbo de una nave de StarWars. En ella se vera una grafica con subidas y bajadas.
+ * @author César Portero Pestaña
+ * @version 1.0 (11/12/2024)
+ */
 public class StarWars {
 
-    public static void principal () {
+    public static boolean principal () {
 
         Scanner entrada = new Scanner(System.in);
 
-        intro();
+        if (!entrada.hasNext()) {
 
-        String [] direcciones = direcciones();
-        
-        String [][] pantalla = new String[5][direcciones.length + 2];
+            return false;
 
-        rellenarBordes(pantalla);
+        } else {
 
-        rellenarPantalla(pantalla, direcciones);
+            entrada.nextLine();
 
-        imprimirPantalla(pantalla);
+            intro();
 
+            String [] direcciones = direcciones();
+
+            String [][] pantalla = new String[5][direcciones.length + 2];
+
+            rellenarBordes(pantalla);
+
+            rellenarPantalla(pantalla, direcciones);
+
+            imprimirPantalla(pantalla);
+
+            return true;
+        }
     }
+
 
     public static void intro () {
 
@@ -48,6 +64,10 @@ public class StarWars {
 
     }
 
+    /**
+     * Con este metodo pasamos a vector la cadena introducida por el usuario una vez ha sido comprobada
+     * @return
+     */
     public static String [] direcciones () {
 
         System.out.println(" > I = Igual. S = Subir. B = Bajar.");
@@ -55,9 +75,13 @@ public class StarWars {
 
         String cadena = comprobarDirecciones();
 
-        return cadena.split("");
+        return cadena.toUpperCase().split("");
     }
-    
+
+    /**
+     * Con este metodo comprobamos que las direcciones que introducimos solo contengan las letras ISB y que la cadena sea menor de 100 caracteres
+     * @return - Devolvemos la cadena que hemos pedido y comprobado.
+     */
     public static String comprobarDirecciones () {
 
         Scanner entrada = new Scanner(System.in);
@@ -65,7 +89,7 @@ public class StarWars {
 
         if (!cadena.toUpperCase().matches("[ISB]+")){
 
-            System.err.println("ERROR. INDICACIONES INCORRECTAS (I-S-B). F@ŁLO CR17IÇ0!");
+            System.err.println("ERROR. INDICACIONES INCORRECTAS (I-S-B). FALLO CRITICO!");
             System.exit(0);
 
         }else if (cadena.length() > 100){
@@ -77,7 +101,12 @@ public class StarWars {
 
         return cadena;
     }
-    
+
+    /**
+     * En este metodo se rellenan los bordes de la matriz
+     * @param pantalla - pantalla hace refenencia a la matiz que se va a rellenar
+     * @return - devolvemos una matriz (pantalla) con los bordes llenos de '#'
+     */
     public static String [][] rellenarBordes (String [][] pantalla) {
 
         for (int i = 0; i < pantalla.length; i++) {
@@ -97,6 +126,12 @@ public class StarWars {
         
         return pantalla;
     }
+
+    /**
+     * En este metodo se va rellenando la matriz segun las letras que indica en vector direcciones.
+     * @param pantalla - Le pasamos la pantalla con '#' en los bordes
+     * @param direcciones - Le pasamos el vector con las letras que indican las direccciones
+     */
     public static void rellenarPantalla (String [][] pantalla, String [] direcciones) {
 
         int alturaActual = 3;
@@ -139,7 +174,10 @@ public class StarWars {
         }
     }
 
-
+    /**
+     * Este metodo imprime por pantalla la matriz
+     * @param pantalla - Le pasamos la matriz con los simbolos ya guardados.
+     */
     public static void imprimirPantalla (String [][] pantalla) {
 
         for (int i = 0; i < pantalla.length; i++) {
@@ -150,6 +188,13 @@ public class StarWars {
 
             System.out.println();
 
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        entrada = new java.util.Scanner(System.in);
+        while (principal()) {
         }
     }
 }

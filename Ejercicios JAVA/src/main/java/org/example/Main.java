@@ -12,7 +12,6 @@ public class Main {
 
     }
 }
-
 //Si queremos llamar al main desde la conola hay ue ir  la dirección de la carpeta.
 //        for (int i = 0; i < args.length; i++) {
 //
