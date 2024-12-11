@@ -57,11 +57,12 @@ public class StarWars {
 
         return cadena.split("");
     }
-
+    
     public static String comprobarDirecciones () {
 
         Scanner entrada = new Scanner(System.in);
         String cadena = entrada.next();
+
         if (!cadena.toUpperCase().matches("[ISB]+")){
 
             System.err.println("ERROR. INDICACIONES INCORRECTAS (I-S-B). F@ŁLO CR17IÇ0!");
@@ -83,16 +84,19 @@ public class StarWars {
             for (int j = 0; j < pantalla[i].length; j++) {
 
                 if (i == 0 || i == pantalla.length - 1 || j == 0 || j == pantalla[i].length - 1) {
+
                     pantalla[i][j] = String.valueOf('#');
+
                 } else {
+
                     pantalla[i][j] = String.valueOf(' ');
+
                 }
             }
         }
         
         return pantalla;
     }
-
     public static void rellenarPantalla (String [][] pantalla, String [] direcciones) {
 
         int alturaActual = 3;
@@ -102,23 +106,32 @@ public class StarWars {
             String direccion = direcciones[k];
 
             if (direccion.equals("I")) {
+
                 pantalla[alturaActual][columnaActual] = "_";
+
             } else if (direccion.equals("S")) {
                 if (alturaActual == 0){
+
                     System.err.println("ERROR. NIVEL DE LA NAVE POR ENCIMA DEL LIMITE. PERDMOS SEÑL...");
                     System.exit(0);
 
                 }
+
                 pantalla[alturaActual][columnaActual] = "/";
                 alturaActual--;
+
             } else if (direccion.equals("B")) {
                 alturaActual++;
+
                 if (alturaActual == 4){
+
                     System.err.println("ERROR. NIVEL DE LA NAVE POR DEBAJO DE 0. ¡¡IMPACTO INMINENTE!!");
                     System.exit(0);
 
                 }
+
                 pantalla[alturaActual][columnaActual] = "\\";
+
             }
 
             columnaActual++;
@@ -126,17 +139,19 @@ public class StarWars {
         }
     }
 
+
     public static void imprimirPantalla (String [][] pantalla) {
 
         for (int i = 0; i < pantalla.length; i++) {
+
             for (int j = 0; j < pantalla[i].length; j++) {
                 System.out.print(pantalla[i][j]);
             }
+
             System.out.println();
+
         }
-
     }
-
 }
 
 
