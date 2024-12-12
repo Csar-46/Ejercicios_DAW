@@ -10,6 +10,17 @@ import java.util.Scanner;
  */
 public class StarWars {
 
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        entrada = new java.util.Scanner(System.in);
+        while (principal()) {
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
     public static boolean principal () {
 
         Scanner entrada = new Scanner(System.in);
@@ -38,7 +49,9 @@ public class StarWars {
         }
     }
 
-
+    /**
+     * Este metodo imprime unos caracteres ASCII con forma de nave espacial para imprimir una intro bonita
+     */
     public static void intro () {
 
         System.out.println("⠀   ______________________________________________________________________\n" +
@@ -191,12 +204,7 @@ public class StarWars {
         }
     }
 
-    public static void main(String[] args) {
-        Scanner entrada = new Scanner(System.in);
-        entrada = new java.util.Scanner(System.in);
-        while (principal()) {
-        }
-    }
+
 }
 
 
