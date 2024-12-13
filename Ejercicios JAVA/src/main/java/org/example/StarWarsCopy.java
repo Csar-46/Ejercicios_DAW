@@ -6,6 +6,14 @@ import java.util.Scanner;
 
 public class StarWarsCopy {
 
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        entrada = new java.util.Scanner(System.in);
+        while (principal()) {
+        }
+    }
+
+
     public static boolean principal () {
 
         Scanner entrada = new Scanner(System.in);
@@ -32,6 +40,9 @@ public class StarWarsCopy {
         }
     }
 
+
+
+
     public static String [] direcciones () {
 
         String cadena = comprobarDirecciones();
@@ -46,11 +57,12 @@ public class StarWarsCopy {
 
         if (!cadena.toUpperCase().matches("[ISB]+")){
 
-            return (String.valueOf(0));
+            return String.valueOf("0");
 
         }else if (cadena.length() > 100){
 
-            return (String.valueOf(0));
+            return String.valueOf("0");
+
         }
 
         return cadena;
@@ -90,9 +102,7 @@ public class StarWarsCopy {
 
             } else if (direccion.equals("S")) {
                 if (alturaActual == 0){
-
-                    System.exit(0);
-
+                    return;
                 }
 
                 pantalla[alturaActual][columnaActual] = "/";
@@ -103,7 +113,7 @@ public class StarWarsCopy {
 
                 if (alturaActual == 4){
 
-                    System.exit(0);
+                    return;
 
                 }
 
@@ -129,12 +139,7 @@ public class StarWarsCopy {
         }
     }
 
-    public static void main(String[] args) {
-        Scanner entrada = new Scanner(System.in);
-        entrada = new java.util.Scanner(System.in);
-        while (principal()) {
-        }
-    }
+
 }
 
 

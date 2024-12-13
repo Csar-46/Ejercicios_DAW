@@ -1,7 +1,7 @@
 package org.example;
-
-import javax.sound.midi.Soundbank;
 import java.util.Scanner;
+import javax.sound.midi.Soundbank;
+
 
 /**
  * Clase para calcular el rumbo de una nave de StarWars. En ella se vera una grafica con subidas y bajadas.
@@ -10,20 +10,20 @@ import java.util.Scanner;
  */
 public class StarWars {
 
+    static Scanner entrada = new Scanner(System.in);
+
     public static void main(String[] args) {
-        Scanner entrada = new Scanner(System.in);
+
         entrada = new java.util.Scanner(System.in);
         while (principal()) {
         }
     }
 
     /**
-     *
-     * @return
+     *En este metodo se llaman a los demas metodos necesarios para llevar a cabo el programa
+     * @return - ambos return se usan para controlar los casos de prueba. En caso
      */
     public static boolean principal () {
-
-        Scanner entrada = new Scanner(System.in);
 
         if (!entrada.hasNext()) {
 
@@ -97,7 +97,6 @@ public class StarWars {
      */
     public static String comprobarDirecciones () {
 
-        Scanner entrada = new Scanner(System.in);
         String cadena = entrada.next();
 
         if (!cadena.toUpperCase().matches("[ISB]+")){
@@ -136,7 +135,7 @@ public class StarWars {
                 }
             }
         }
-        
+
         return pantalla;
     }
 
