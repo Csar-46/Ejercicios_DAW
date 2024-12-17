@@ -6,16 +6,16 @@ import javax.sound.midi.Soundbank;
 /**
  * Clase para calcular el rumbo de una nave de StarWars. En ella se vera una grafica con subidas y bajadas.
  * @author César Portero Pestaña
- * @version 1.0 (11/12/2024)
+ * @version 1.2 (17/12/2024)
  */
 public class StarWars {
 
     static Scanner entrada = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { //En el main se llama a la funcion principal.
 
         entrada = new java.util.Scanner(System.in);
-        while (principal()) {
+        while (principal()) { //Se hará un blucle del prgrama hasta que se cierre manualmente o haya un error.
         }
     }
 
@@ -23,7 +23,7 @@ public class StarWars {
      *En este metodo se llaman a los demas metodos necesarios para llevar a cabo el programa
      * @return - ambos return se usan para controlar los casos de prueba. En caso
      */
-    public static boolean principal () {
+    public static boolean principal () { //En este metodo simplemente se llama a los metodos que estan mas adelante explicados.
 
         if (!entrada.hasNext()) {
 
@@ -35,9 +35,9 @@ public class StarWars {
 
             intro();
 
-            String [] direcciones = direcciones();
+            String [] direcciones = direcciones(); //Guardamos el vector que devuelve la funcion en la variable direcciones.
 
-            String [][] pantalla = new String[5][direcciones.length + 2];
+            String [][] pantalla = new String[5][direcciones.length + 2]; //Creamos una matriz que tenga el ancho capaz de contener a direcciones y a los bordes.
 
             rellenarBordes(pantalla);
 
@@ -75,7 +75,7 @@ public class StarWars {
                 "\n" +
                 "------------------------------------------------\n");
 
-    }
+    }// Este metodo simplemente imprime un mensaje por pantalla.
 
     /**
      * Con este metodo pasamos a vector la cadena introducida por el usuario una vez ha sido comprobada
@@ -86,9 +86,9 @@ public class StarWars {
         System.out.println(" > I = Igual. S = Subir. B = Bajar.");
         System.out.println(" > Introduce un maximo de 100 direcciones. (ISB): ");
 
-        String cadena = comprobarDirecciones();
+        String cadena = comprobarDirecciones(); //Llamamos al metodo para comprobar que la cadena tiene las condiciones que queremos.
 
-        return cadena.toUpperCase().split("");
+        return cadena.toUpperCase().split(""); //Devolvemos un vector a principal.
     }
 
     /**
@@ -97,21 +97,21 @@ public class StarWars {
      */
     public static String comprobarDirecciones () {
 
-        String cadena = entrada.next();
+        String cadena = entrada.next(); //Pedimos la cadena
 
-        if (!cadena.toUpperCase().matches("[ISB]+")){
+        if (!cadena.toUpperCase().matches("[ISB]+")){ //Controlamos que tenga los caracteres que queremos.
 
             System.err.println("ERROR. INDICACIONES INCORRECTAS (I-S-B). FALLO CRITICO!");
             System.exit(0);
 
-        }else if (cadena.length() > 100){
+        }else if (cadena.length() > 100){ //Controlamos que no sea mas lagra de lo permitido
 
             System.err.println("ERROR. COMANDO FUERA DE LOS LIMITES ESPACIALES! INTRODUCE 100 DIRECCIONES COMO MAXIMO...");
             System.exit(0);
 
         }
 
-        return cadena;
+        return cadena; //Devolvemos cadena al metodo direcciones.
     }
 
     /**
@@ -121,16 +121,17 @@ public class StarWars {
      */
     public static String [][] rellenarBordes (String [][] pantalla) {
 
+        //Con estos dos buclles recorremos la matriz
         for (int i = 0; i < pantalla.length; i++) {
             for (int j = 0; j < pantalla[i].length; j++) {
 
-                if (i == 0 || i == pantalla.length - 1 || j == 0 || j == pantalla[i].length - 1) {
+                if (i == 0 || i == pantalla.length - 1 || j == 0 || j == pantalla[i].length - 1) { //En caso de estar en un lateral guardamos un '#'
 
                     pantalla[i][j] = String.valueOf('#');
 
                 } else {
 
-                    pantalla[i][j] = String.valueOf(' ');
+                    pantalla[i][j] = String.valueOf(' ');//En cualquier otra posicion guardamos un espacio.
 
                 }
             }
