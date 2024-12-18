@@ -77,6 +77,7 @@ public class StarWars {
 
     }// Este metodo simplemente imprime un mensaje por pantalla.
 
+
     /**
      * Con este metodo pasamos a vector la cadena introducida por el usuario una vez ha sido comprobada
      * @return
@@ -90,6 +91,7 @@ public class StarWars {
 
         return cadena.toUpperCase().split(""); //Devolvemos un vector a principal.
     }
+
 
     /**
      * Con este metodo comprobamos que las direcciones que introducimos solo contengan las letras ISB y que la cadena sea menor de 100 caracteres
@@ -113,6 +115,7 @@ public class StarWars {
 
         return cadena; //Devolvemos cadena al metodo direcciones.
     }
+
 
     /**
      * En este metodo se rellenan los bordes de la matriz
@@ -140,6 +143,7 @@ public class StarWars {
         return pantalla;
     }
 
+
     /**
      * En este metodo se va rellenando la matriz segun las letras que indica en vector direcciones.
      * @param pantalla - Le pasamos la pantalla con '#' en los bordes
@@ -147,18 +151,18 @@ public class StarWars {
      */
     public static void rellenarPantalla (String [][] pantalla, String [] direcciones) {
 
-        int alturaActual = 3;
+        int alturaActual = 3; //Definimos la posicion de la esquina inferior izquierda tal y como pide el ejercicio.
         int columnaActual = 1;
 
-        for (int k = 0; k < direcciones.length; k++) {
+        for (int k = 0; k < direcciones.length; k++) { //Con este for recorremos el vector que hemos creado con el .split en un metodo anterior
             String direccion = direcciones[k];
 
-            if (direccion.equals("I")) {
+            if (direccion.equals("I")) { //En caso de ser == I, ponemos un '_'
 
                 pantalla[alturaActual][columnaActual] = "_";
 
-            } else if (direccion.equals("S")) {
-                if (alturaActual == 0){
+            } else if (direccion.equals("S")) { //En caso de ser == S, ponemos un '/'
+                if (alturaActual == 0){ //Controlamos que nunca se llegue al borde superior de la matriz con esta condicion.
 
                     System.err.println("ERROR. NIVEL DE LA NAVE POR ENCIMA DEL LIMITE. PERDMOS SEÑL...");
                     System.exit(0);
@@ -166,12 +170,12 @@ public class StarWars {
                 }
 
                 pantalla[alturaActual][columnaActual] = "/";
-                alturaActual--;
+                alturaActual--; //Este contador disminuye cuando hay una 'S' en el vector, asi le indicamos que hay que subir
 
-            } else if (direccion.equals("B")) {
-                alturaActual++;
+            } else if (direccion.equals("B")) { //En caso de ser == B, ponemos un '\'
+                alturaActual++; //Este contador aumenta cuando hay una 'B' en el vector, asi le indicamos que hay que bajar
 
-                if (alturaActual == 4){
+                if (alturaActual == 4){ //Controlamos que nunca se baje mas que el limite inferior.
 
                     System.err.println("ERROR. NIVEL DE LA NAVE POR DEBAJO DE 0. ¡¡IMPACTO INMINENTE!!");
                     System.exit(0);
@@ -182,10 +186,11 @@ public class StarWars {
 
             }
 
-            columnaActual++;
+            columnaActual++; //Este contador suma 1 a la columna una vez hemos comprobado la primera letra del vector para poner la siguiente direccion en la siguiente columna.
 
         }
     }
+
 
     /**
      * Este metodo imprime por pantalla la matriz
@@ -202,7 +207,7 @@ public class StarWars {
             System.out.println();
 
         }
-    }
+    }//En este metodo simplemente imprimimos la matriz.
 
 
 }
