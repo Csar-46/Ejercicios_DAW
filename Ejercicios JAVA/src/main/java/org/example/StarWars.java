@@ -6,7 +6,7 @@ import javax.sound.midi.Soundbank;
 /**
  * Clase para calcular el rumbo de una nave de StarWars. En ella se vera una grafica con subidas y bajadas.
  * @author César Portero Pestaña
- * @version 1.2 (17/12/2024)
+ * @version 1.3 (19/12/2024)
  */
 public class StarWars {
 
@@ -130,11 +130,11 @@ public class StarWars {
 
                 if (i == 0 || i == pantalla.length - 1 || j == 0 || j == pantalla[i].length - 1) { //En caso de estar en un lateral guardamos un '#'
 
-                    pantalla[i][j] = String.valueOf('#');
+                    pantalla[i][j] = ("#");
 
                 } else {
 
-                    pantalla[i][j] = String.valueOf(' ');//En cualquier otra posicion guardamos un espacio.
+                    pantalla[i][j] = (" ");//En cualquier otra posicion guardamos un espacio.
 
                 }
             }
@@ -157,11 +157,12 @@ public class StarWars {
         for (int k = 0; k < direcciones.length; k++) { //Con este for recorremos el vector que hemos creado con el .split en un metodo anterior
             String direccion = direcciones[k];
 
-            if (direccion.equals("I")) { //En caso de ser == I, ponemos un '_'
+            if (direccion.equals("I")) { //En caso de ser == I, ponemos un _
 
                 pantalla[alturaActual][columnaActual] = "_";
 
-            } else if (direccion.equals("S")) { //En caso de ser == S, ponemos un '/'
+            } else if (direccion.equals("S")) { //En caso de ser == S, ponemos un /
+
                 if (alturaActual == 0){ //Controlamos que nunca se llegue al borde superior de la matriz con esta condicion.
 
                     System.err.println("ERROR. NIVEL DE LA NAVE POR ENCIMA DEL LIMITE. PERDMOS SEÑL...");
@@ -170,10 +171,10 @@ public class StarWars {
                 }
 
                 pantalla[alturaActual][columnaActual] = "/";
-                alturaActual--; //Este contador disminuye cuando hay una 'S' en el vector, asi le indicamos que hay que subir
+                alturaActual--; //Este contador disminuye cuando hay una S en el vector, asi le indicamos que hay que subir
 
-            } else if (direccion.equals("B")) { //En caso de ser == B, ponemos un '\'
-                alturaActual++; //Este contador aumenta cuando hay una 'B' en el vector, asi le indicamos que hay que bajar
+            } else if (direccion.equals("B")) { //En caso de ser == B, ponemos un \
+                alturaActual++; //Este contador aumenta cuando hay una B en el vector, asi le indicamos que hay que bajar
 
                 if (alturaActual == 4){ //Controlamos que nunca se baje mas que el limite inferior.
 
@@ -207,8 +208,7 @@ public class StarWars {
             System.out.println();
 
         }
-    }//En este metodo simplemente imprimimos la matriz.
-
+    } //En este metodo simplemente imprimimos la matriz.
 
 }
 

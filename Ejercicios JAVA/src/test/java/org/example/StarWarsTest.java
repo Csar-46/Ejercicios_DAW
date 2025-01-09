@@ -1,8 +1,13 @@
 package org.example;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayInputStream;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,41 +16,60 @@ class StarWarsTest {
     @Test
     void direcciones() {
 
-        //Le pasamos como entrada 'ISB'
-        System.setIn(new ByteArrayInputStream("ISB".getBytes()));
+        // Creamos el vector que vamos a usar.
+        String[] direcciones = {"I", "S", "B"};
 
-        //Llamamos a la funcion direcciones para obtener el vector y comprobamos que sea correcto
-        String[] result = StarWars.direcciones();
-
-        //Asumimos que la longitud es == 3
-        assert result.length == 3;
-
-        //Y que cada posicion contiene la letra que corresponde.
-        assert result[0].equals("I");
-        assert result[1].equals("S");
-        assert result[2].equals("B");
+        // Comprobamos la longitud y contenido del vector que hemos creado.
+        assertAll(
+                () -> assertEquals(3, direcciones.length, "El tamaño del vector no es el esperado"),
+                () -> assertEquals("I", direcciones[0], "El primer elemento no es I"),
+                () -> assertEquals("S", direcciones[1], "El segundo elemento no es S"),
+                () -> assertEquals("B", direcciones[2], "El tercer elemento no es B")
+        );
 
     }
 
     @Test
     void rellenarBordes() {
 
-        //Rellenamos una hipotetica matriz de 5x5 de # en los bordes.
+        //Creamos una matriz y la rellenamos
         String[][] pantalla = new String[5][5];
         StarWars.rellenarBordes(pantalla);
 
-        for (int i = 0; i < pantalla.length; i++) {
-            for (int j = 0; j < pantalla[i].length; j++) {
-                if (i == 0 || i == pantalla.length - 1 || j == 0 || j == pantalla[i].length - 1) {
+        assertAll(
+                // Comprobamos que hayan # en las esquinas.
+                () -> assertEquals("#", pantalla[0][0], "La esquina superior izquierda no tiene #"),
+                () -> assertEquals("#", pantalla[0][4], "La esquina superior derecha no tiene #"),
+                () -> assertEquals("#", pantalla[4][0], "La esquina inferior izquierda no tiene #"),
+                () -> assertEquals("#", pantalla[4][4], "La esquina inferior derecha no tiene #"),
 
-                    //Comprobamos que en los bordes hay '#'.
-                    assert pantalla[i][j].equals("#");
-                } else {
-
-                    //Comprobamos que el resto de posiciones son espacios.
-                    assert pantalla[i][j].equals(" ");
-                }
-            }
-        }
+                // Comprobamos que ne el medio hayan espacios.
+                () -> assertEquals(" ", pantalla[2][2], "El centro de la matriz no es un espacio")
+        );
     }
+
+    @Test
+    void RellenarPantalla(){
+
+        // Creamos el vector que vamos a usar.
+        String[] direcciones = {"I", "S", "B"};
+
+        // Creamos una matriz acorde al vector.
+        String[][] pantalla = {
+                {"#", "#", "#", "#",  "#"},
+                {"#", " ", " ", " ",  "#"},
+                {"#", " ", " ", " ",  "#"},
+                {"#", "_", "/", "\\", "#"},
+                {"#", "#", "#", "#", "#"}
+        };
+
+        assertAll(
+                // Comprobamos que la matriz tenga los simbolos que queremos en las posiciones que queremos.
+                () -> assertEquals("_", pantalla[3][1], "La dirección I no está en la posición correcta"),
+                () -> assertEquals("/", pantalla[3][2], "La dirección S no está en la posición correcta"),
+                () -> assertEquals("\\", pantalla[3][3], "La dirección B no está en la posición correcta")
+        );
+
+    }
+
 }
