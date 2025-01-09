@@ -4,12 +4,14 @@ import java.util.Scanner;
 
 public class N_Bucleless {
 
-    public static void numeros(int n, int cont){
+    static int n;
+
+    public static void numeros(int cont){
 
         if (cont <= n) {
 
             System.out.print(cont + " ");
-            numeros(n, cont+1);
+            numeros(cont+1);
 
         }
     }
@@ -20,10 +22,9 @@ public class N_Bucleless {
 
         System.out.println("Introduce el numero hasta el que quieras contar:");
 
-        int n = entrada.nextInt();
-        int cont = 1;
+        n = entrada.nextInt();
 
-        numeros(n, cont);
+        numeros(1);
     }
 
 }

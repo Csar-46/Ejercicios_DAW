@@ -1,27 +1,25 @@
 package org.example;
 
-import java.util.Scanner;
-
 public class Suma_Bucleless {
 
-    public static void numeros(int n, int cont){
+    public static void numeros(int suma, int resultado){
 
-        if (cont <= n) {
+        if (suma <= 10) {
 
-            System.out.print(cont + " ");
-            numeros(n, cont+1);
+            resultado += suma;
+            numeros(++suma, resultado);
+
+        } else {
+
+            System.out.println(resultado);
 
         }
     }
 
     public static void main(String[] args){
 
-        Scanner entrada = new Scanner(System.in);
+        numeros(1, 0);
 
-        int n;
-        int cont = 1;
-
-        numeros(n, cont);
     }
 
 }
